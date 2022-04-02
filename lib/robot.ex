@@ -7,5 +7,4 @@ defmodule Robot do
 
   @enforce_keys [:x, :y, :orientation]
   defstruct [:x, :y, :orientation, lost: false]
-
 end

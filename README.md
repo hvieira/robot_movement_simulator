@@ -1,21 +1,39 @@
 # RobotMovementSimulator
 
-**TODO: Add description**
+- The world is modelled as a grid with size m x n
+- Program reads the input, updates the robots, and print out the final states
+of the robots
+- Each robot has a position (x, y), and an orientation (N, E, S, W)
+- Each robot can move forward one space (F), rotate left by 90 degrees (L), or rotate
+right by 90 degrees (R)
+- If a robot moves off the grid, it is marked as ‘lost’ and its last valid grid position and
+orientation is recorded
+- Going from x -> x + 1 is in the easterly direction, and y -> y + 1 is in the northerly
+direction. i.e. (0, 0) represents the south-west corner of the grid
 
-## Installation
+## Input format
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `robot_movement_simulator` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:robot_movement_simulator, "~> 0.1.0"}
-  ]
-end
+```text
+4 8
+(2, 3, E) LFRFF
+(0, 2, N) FFLFRFF
 ```
+- The first line of the input `4 8` specifies the size of the grid. 
+- The subsequent lines each represent the initial state and commands for a single robot: 
+  - `(0, 2, N)` specifies the initial state in the form `(x, y, orientation)`
+  - `FFLFRFF` represents the sequence of movement commands for the robot.
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/robot_movement_simulator>.
+## Output format
+```text
+(4, 4, E)
+(0, 4, W) LOST
+```
+Each line represents the final position and orientation of the robots of the form 
+`(x, y, orientation)` and optionally whether the robot was lost.
+
+## Running
+TBD
+
+## Tests
+TBD
 

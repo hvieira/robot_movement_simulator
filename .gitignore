@@ -24,3 +24,5 @@ robot_movement_simulator-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+*.iml

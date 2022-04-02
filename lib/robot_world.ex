@@ -23,5 +23,19 @@ defmodule RobotWorld do
     %{world | robot: robot}
   end
 
+  @doc """
+  Moves the Robot
+  """
+  @spec move_robot(RobotWorld.t(), Robot.command()) :: RobotWorld.t()
+  def move_robot(world, 'F') do
+    %{world | robot: world.robot |> Robot.forward(world)}
+  end
 
+  def move_robot(world, 'L') do
+    %{world | robot: world.robot |> Robot.turn_left()}
+  end
+
+  def move_robot(world, 'R') do
+    %{world | robot: world.robot |> Robot.turn_right()}
+  end
 end

@@ -27,15 +27,19 @@ defmodule RobotWorld do
   Moves the Robot
   """
   @spec move_robot(RobotWorld.t(), Robot.command()) :: RobotWorld.t()
-  def move_robot(world, 'F') do
+  def move_robot(world, ?F) do
     %{world | robot: world.robot |> Robot.forward(world)}
   end
 
-  def move_robot(world, 'L') do
+  def move_robot(world, ?L) do
     %{world | robot: world.robot |> Robot.turn_left()}
   end
 
-  def move_robot(world, 'R') do
+  def move_robot(world, ?R) do
     %{world | robot: world.robot |> Robot.turn_right()}
+  end
+
+  def as_output(world) do
+    "(#{world.robot.x}, #{world.robot.y}, #{List.to_string([world.robot.orientation])})#{unless world.robot.lost, do: "", else: " LOST"}"
   end
 end

@@ -340,6 +340,72 @@ defmodule RobotWorldTest do
                  }
                }
     end
+
+    test "turning a lost robot are no-op" do
+      assert RobotWorld.create(3, 3)
+             |> RobotWorld.place_robot(%Robot{x: 0, y: 1, orientation: 'W'})
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('L')
+             |> RobotWorld.move_robot('L') ==
+               %RobotWorld{
+                 width: 3,
+                 height: 3,
+                 robot: %Robot{
+                   x: 0,
+                   y: 1,
+                   orientation: 'W',
+                   lost: true
+                 }
+               }
+
+      assert RobotWorld.create(3, 3)
+             |> RobotWorld.place_robot(%Robot{x: 2, y: 1, orientation: 'E'})
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('L')
+             |> RobotWorld.move_robot('L') ==
+               %RobotWorld{
+                 width: 3,
+                 height: 3,
+                 robot: %Robot{
+                   x: 2,
+                   y: 1,
+                   orientation: 'E',
+                   lost: true
+                 }
+               }
+
+      assert RobotWorld.create(3, 3)
+             |> RobotWorld.place_robot(%Robot{x: 1, y: 0, orientation: 'S'})
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('L')
+             |> RobotWorld.move_robot('L') ==
+               %RobotWorld{
+                 width: 3,
+                 height: 3,
+                 robot: %Robot{
+                   x: 1,
+                   y: 0,
+                   orientation: 'S',
+                   lost: true
+                 }
+               }
+
+      assert RobotWorld.create(3, 3)
+             |> RobotWorld.place_robot(%Robot{x: 1, y: 2, orientation: 'N'})
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('L')
+             |> RobotWorld.move_robot('L') ==
+               %RobotWorld{
+                 width: 3,
+                 height: 3,
+                 robot: %Robot{
+                   x: 1,
+                   y: 2,
+                   orientation: 'N',
+                   lost: true
+                 }
+               }
+    end
   end
 
   describe "examples" do
@@ -457,8 +523,7 @@ defmodule RobotWorldTest do
              |> RobotWorld.move_robot('F')
              |> RobotWorld.move_robot('L')
              |> RobotWorld.move_robot('F')
-             |> RobotWorld.move_robot('F')
-             ==
+             |> RobotWorld.move_robot('F') ==
                %RobotWorld{
                  width: 5,
                  height: 3,
@@ -500,6 +565,28 @@ defmodule RobotWorldTest do
                    x: 4,
                    y: 1,
                    orientation: 'E',
+                   lost: true
+                 }
+               }
+    end
+
+    test "example 8" do
+      assert RobotWorld.create(4, 8)
+             |> RobotWorld.place_robot(%Robot{x: 0, y: 2, orientation: 'N'})
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('L')
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('R')
+             |> RobotWorld.move_robot('F')
+             |> RobotWorld.move_robot('F') ==
+               %RobotWorld{
+                 width: 4,
+                 height: 8,
+                 robot: %Robot{
+                   x: 0,
+                   y: 4,
+                   orientation: 'W',
                    lost: true
                  }
                }

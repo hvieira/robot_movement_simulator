@@ -11,11 +11,6 @@ orientation is recorded
 - Going from x -> x + 1 is in the easterly direction, and y -> y + 1 is in the northerly
 direction. i.e. (0, 0) represents the south-west corner of the grid
 
-## To be decided
-- Changing a robot direction when it's lost should be a no-op? 
-  For now, will consider that the robot can still change directions
-- Can a robot be recovered from lost state? 
-  For now, will not consider such scenarios
 
 ## Input format
 

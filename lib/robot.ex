@@ -39,6 +39,7 @@ defmodule Robot do
   Changes the Robot orientation to the left.
   """
   @spec turn_left(Robot.t()) :: Robot.t()
+  def turn_left(%Robot{lost: true} = robot), do: robot
   def turn_left(%Robot{orientation: 'N'} = robot), do: %{robot | orientation: 'W'}
   def turn_left(%Robot{orientation: 'W'} = robot), do: %{robot | orientation: 'S'}
   def turn_left(%Robot{orientation: 'S'} = robot), do: %{robot | orientation: 'E'}
@@ -48,6 +49,7 @@ defmodule Robot do
   Changes the Robot orientation to the right.
   """
   @spec turn_right(Robot.t()) :: Robot.t()
+  def turn_right(%Robot{lost: true} = robot), do: robot
   def turn_right(%Robot{orientation: 'N'} = robot), do: %{robot | orientation: 'E'}
   def turn_right(%Robot{orientation: 'E'} = robot), do: %{robot | orientation: 'S'}
   def turn_right(%Robot{orientation: 'S'} = robot), do: %{robot | orientation: 'W'}

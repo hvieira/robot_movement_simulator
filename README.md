@@ -53,6 +53,12 @@ You can also pass a file as an input - see some examples under `input_examples`
 ./robot_movement_simulator < input_examples/example_1.txt
 ```
 
-## Executing tests
+### Executing tests
 `mix test`
+
+## Further improvements
+- Define enums with https://hexdocs.pm/enum_type/readme.html 
+  for orientation and commands
+- Run dialyzer - https://www.erlang.org/doc/man/dialyzer.html - to check correct
+  types (and fix whatever is needed for a successful run)
 

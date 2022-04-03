@@ -1,6 +1,11 @@
 # RobotMovementSimulator
 
-- The world is modelled as a grid with size m x n
+- The world is modelled as a grid with size m x n, where:
+  - the grid is 0 based index
+  - `m` is the maximum "in bounds" value for x axis
+  - `n` is the maximum "in bounds" value for y axis
+  - Going from x -> x + 1 is in the easterly direction, and y -> y + 1 is in the northerly
+    direction. i.e. (0, 0) represents the south-west corner of the grid
 - Program reads the input, updates the robots, and print out the final states
 of the robots
 - Each robot has a position (x, y), and an orientation (N, E, S, W)
@@ -8,8 +13,7 @@ of the robots
 right by 90 degrees (R)
 - If a robot moves off the grid, it is marked as ‘lost’ and its last valid grid position and
 orientation is recorded
-- Going from x -> x + 1 is in the easterly direction, and y -> y + 1 is in the northerly
-direction. i.e. (0, 0) represents the south-west corner of the grid
+
 
 
 ## Input format

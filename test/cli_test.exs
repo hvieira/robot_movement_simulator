@@ -27,7 +27,7 @@ defmodule RobotMovementSimulator.CLITest do
     {:ok, pid} = StringIO.open(input |> String.trim())
 
     assert RobotMovementSimulator.CLI.execute(pid) == [
-             "(3, 4, E) LOST",
+             "(4, 4, E)",
              "(0, 4, W) LOST"
            ]
   end

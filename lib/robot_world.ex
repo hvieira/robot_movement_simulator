@@ -7,7 +7,7 @@ defmodule RobotWorld do
   defstruct [:width, :height, robot: nil]
 
   @spec create(integer, integer) :: RobotWorld.t()
-  def create(w, h), do: %RobotWorld{width: w, height: h}
+  def create(w, h), do: %RobotWorld{width: w + 1, height: h + 1}
 
   @doc """
   Adds a robot to the world. If the robot initial coordinates are outside of the

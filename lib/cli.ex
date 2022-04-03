@@ -1,15 +1,22 @@
 defmodule RobotMovementSimulator.CLI do
   def main(_args \\ []) do
-    raw_world_input = IO.read(:stdio, :line)
+    final_states = execute(:stdio)
+
+    final_states
+    |> Enum.each(fn s -> IO.puts(s) end)
+  end
+
+  def execute(input_device) do
+    raw_world_input = IO.read(input_device, :line)
 
     world =
       raw_world_input
       |> world_from_raw_input()
 
-    robot_and_commands = read_robot_input([])
+    robot_and_commands = read_robot_input(input_device, [])
 
     robot_and_commands
-    |> Enum.each(fn rc ->
+    |> Enum.map(fn rc ->
       world_with_robot =
         world
         |> RobotWorld.place_robot(rc["robot"])
@@ -19,25 +26,29 @@ defmodule RobotMovementSimulator.CLI do
         |> String.to_charlist()
         |> Enum.reduce(world_with_robot, fn c, w -> RobotWorld.move_robot(w, c) end)
 
-      IO.puts(RobotWorld.as_output(final))
+      RobotWorld.as_output(final)
     end)
   end
 
   defp world_from_raw_input(raw_input) do
-    raw_input
-    |> String.trim()
-    |> String.split()
-    |> world_from_input()
-  end
+    [w, h] =
+      raw_input
+      |> String.trim()
+      |> String.split()
 
-  defp world_from_input([w, h]) do
     RobotWorld.create(String.to_integer(w), String.to_integer(h))
   end
 
-  defp read_robot_input(acc) do
-    case IO.read(:stdio, :line) do
-      :eof -> acc
-      data -> read_robot_input(acc |> Enum.concat([robot_instructions(data |> String.trim())]))
+  defp read_robot_input(input_device, acc) do
+    case IO.read(input_device, :line) do
+      :eof ->
+        acc
+
+      data ->
+        read_robot_input(
+          input_device,
+          acc |> Enum.concat([robot_instructions(data |> String.trim())])
+        )
     end
   end
 

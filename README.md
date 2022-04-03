@@ -33,8 +33,22 @@ Each line represents the final position and orientation of the robots of the for
 `(x, y, orientation)` and optionally whether the robot was lost.
 
 ## Running
-TBD
+Build the binary by running: 
+```shell
+mix escript.build
+```
+and then run
+```shell
+./robot_movement_simulator << EOF                                                                                                                              1 ↵
+<input>
+EOF
+```
 
-## Tests
-TBD
+You can also pass a file as an input - see some examples under `input_examples`
+```shell
+./robot_movement_simulator < input_examples/example_1.txt
+```
+
+## Executing tests
+`mix test`
 

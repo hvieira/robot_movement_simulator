@@ -11,29 +11,13 @@ defmodule Robot do
 
   @doc """
   Moves the Robot forward according to its orientation.
-  If the Robot moves outside the given world, then it is deemed lost and its coordinates are not updated
   """
-  @spec forward(Robot.t(), RobotWorld.t()) :: Robot.t()
-  def forward(%Robot{lost: true} = robot, _world), do: robot
-
-  def forward(%Robot{y: y, orientation: ?N} = robot, %RobotWorld{height: h})
-      when y == h - 1,
-      do: %{robot | lost: true}
-
-  def forward(%Robot{y: 0, orientation: ?S} = robot, _world),
-    do: %{robot | lost: true}
-
-  def forward(%Robot{x: x, orientation: ?E} = robot, %RobotWorld{width: w})
-      when x == w - 1,
-      do: %{robot | lost: true}
-
-  def forward(%Robot{x: 0, orientation: ?W} = robot, _world),
-    do: %{robot | lost: true}
-
-  def forward(%Robot{y: y, orientation: ?N} = robot, _world), do: %{robot | y: y + 1}
-  def forward(%Robot{x: x, orientation: ?E} = robot, _world), do: %{robot | x: x + 1}
-  def forward(%Robot{y: y, orientation: ?S} = robot, _world), do: %{robot | y: y - 1}
-  def forward(%Robot{x: x, orientation: ?W} = robot, _world), do: %{robot | x: x - 1}
+  @spec forward(Robot.t()) :: Robot.t()
+  def forward(%Robot{lost: true} = robot), do: robot
+  def forward(%Robot{y: y, orientation: ?N} = robot), do: %{robot | y: y + 1}
+  def forward(%Robot{x: x, orientation: ?E} = robot), do: %{robot | x: x + 1}
+  def forward(%Robot{y: y, orientation: ?S} = robot), do: %{robot | y: y - 1}
+  def forward(%Robot{x: x, orientation: ?W} = robot), do: %{robot | x: x - 1}
 
   @doc """
   Changes the Robot orientation to the left.

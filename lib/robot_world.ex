@@ -28,7 +28,12 @@ defmodule RobotWorld do
   """
   @spec move_robot(RobotWorld.t(), Robot.command()) :: RobotWorld.t()
   def move_robot(world, ?F) do
-    %{world | robot: world.robot |> Robot.forward(world)}
+    updated_robot = world.robot |> Robot.forward()
+
+    case robot_outside_of_world?(world, updated_robot) do
+      true -> %{world | robot: %{world.robot | lost: true}}
+      false -> %{world | robot: updated_robot}
+    end
   end
 
   def move_robot(world, ?L) do
@@ -42,4 +47,10 @@ defmodule RobotWorld do
   def as_output(world) do
     "(#{world.robot.x}, #{world.robot.y}, #{List.to_string([world.robot.orientation])})#{unless world.robot.lost, do: "", else: " LOST"}"
   end
+
+  defp robot_outside_of_world?(world, %Robot{x: x, y: y})
+       when x < 0 or x >= world.width or (y < 0 or y >= world.height),
+       do: true
+
+  defp robot_outside_of_world?(_world, _robot), do: false
 end
